@@ -4,8 +4,7 @@ import ua.lviv.sombra.enums.Gender;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name = "authors")
@@ -34,7 +33,7 @@ public class Author {
                     CascadeType.PERSIST
             } )
     @JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "author_id"),inverseJoinColumns = @JoinColumn(name = "book_id"))
-    private List<Book> books=new ArrayList<>();
+    private Set<Book> books=new HashSet<>();
 
     public Long getId() {
         return id;
@@ -68,11 +67,28 @@ public class Author {
         this.born = born;
     }
 
-    public List<Book> getBooks() {
+    public Set<Book> getBooks() {
         return books;
     }
 
-    public void setBooks(List<Book> books) {
+    public void setBooks(Set<Book> books) {
         this.books = books;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Author)) return false;
+        Author author = (Author) o;
+        return Objects.equals(getId(), author.getId()) &&
+                Objects.equals(getName(), author.getName()) &&
+                getGender() == author.getGender() &&
+                Objects.equals(getBorn(), author.getBorn()) &&
+                Objects.equals(getBooks(), author.getBooks());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getName(), getGender(), getBorn(), getBooks());
     }
 }

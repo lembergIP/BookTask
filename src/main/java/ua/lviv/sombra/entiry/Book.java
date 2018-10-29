@@ -2,8 +2,7 @@ package ua.lviv.sombra.entiry;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 
 @Entity
@@ -33,7 +32,7 @@ public class Book {
                     CascadeType.PERSIST
             } )
     @JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "author_id"),inverseJoinColumns = @JoinColumn(name = "book_id"))
-    private List<Author> authors=new ArrayList<>();
+    private Set<Author> authors=new HashSet<>();
 
     public Long getId() {
         return id;
@@ -75,11 +74,29 @@ public class Book {
         this.rating = rating;
     }
 
-    public List<Author> getAuthors() {
+    public Set<Author> getAuthors() {
         return authors;
     }
 
-    public void setAuthors(List<Author> authors) {
+    public void setAuthors(Set<Author> authors) {
         this.authors = authors;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Book)) return false;
+        Book book = (Book) o;
+        return Objects.equals(getId(), book.getId()) &&
+                Objects.equals(getName(), book.getName()) &&
+                Objects.equals(getPublished(), book.getPublished()) &&
+                Objects.equals(getGenre(), book.getGenre()) &&
+                Objects.equals(getRating(), book.getRating()) &&
+                Objects.equals(getAuthors(), book.getAuthors());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getName(), getPublished(), getGenre(), getRating(), getAuthors());
     }
 }
