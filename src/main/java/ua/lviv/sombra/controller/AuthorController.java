@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import ua.lviv.sombra.service.AuthorService;
 import ua.lviv.sombra.service.dto.AuthorDto;
 
+import java.util.Set;
+
 @RestController
 @RequestMapping("/api/author")
 public class AuthorController {
@@ -38,4 +40,27 @@ public class AuthorController {
     public AuthorDto updateAuthor(@RequestBody AuthorDto authorDto) {
         return authorService.updateAuthor(authorDto);
     }
+
+    @PutMapping("/{authorId}/book/{bookId}")
+    public ResponseEntity<AuthorDto> addBookToAuthor(@PathVariable Long authorId, @PathVariable Long bookId) {
+        authorService.addBookToAuthor(authorId, bookId);
+        return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/{authorId}/book/{bookId}")
+    public ResponseEntity<AuthorDto> deleteBookFromAuthor(@PathVariable Long authorId, @PathVariable Long bookId) {
+        authorService.deleteBookFromAuthor(authorId, bookId);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/olderThan/{age}")
+    public Set<AuthorDto> getAuthorsOlderThan(@PathVariable Integer age){
+        return authorService.getAuthorsOlderThan(age);
+    }
+
+    @GetMapping("/bookNumber/most")
+    public Set<AuthorDto> getAuthorsByMostNumberOfBooks(){
+        return authorService.getAuthorsByMostNumberOfBooks();
+    }
+    
 }

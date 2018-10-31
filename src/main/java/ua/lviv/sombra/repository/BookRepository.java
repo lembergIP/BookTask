@@ -6,4 +6,6 @@ import ua.lviv.sombra.entiry.Book;
 
 @Repository
 public interface BookRepository extends JpaRepository<Book,Long> {
+
+int countBooksByGenre(String genre);
 }

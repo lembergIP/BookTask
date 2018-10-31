@@ -12,7 +12,7 @@ INSERT INTO `books` (`id`, `name`,`published`, `genre`,`rating`) VALUES (3, 'Eff
 INSERT INTO `books` (`id`, `name`,`published`, `genre`,`rating`) VALUES (4, 'Java Concurrency in Practice', '2006-04-23', 'technical', '4');
 INSERT INTO `books` (`id`, `name`,`published`, `genre`,`rating`) VALUES (5, 'Java Puzzlers: Traps, Pitfalls, and Corner Cases', '2005-02-02', 'technical', '4');
 INSERT INTO `books` (`id`, `name`,`published`, `genre`,`rating`) VALUES (6, 'Patterns of Enterprise Application Architecture', '2002-06-25', 'technical', '3');
-INSERT INTO `books` (`id`, `name`,`published`, `genre`,`rating`) VALUES (7, 'Harry Potter and the Philosophers Stone, 1997-06-26', 'fantasy', '5');
+INSERT INTO `books` (`id`, `name`,`published`, `genre`,`rating`) VALUES (7, 'Harry Potter and the Philosophers Stone', '1997-06-26', 'fantasy', '5');
 INSERT INTO `books` (`id`, `name`,`published`, `genre`,`rating`) VALUES (8, 'The Passionate Programmer', '1999-09-21', 'education', '5');
 INSERT INTO `books` (`id`, `name`,`published`, `genre`,`rating`) VALUES (9, 'The Lost Symbol', null, 'crime', '4');
 

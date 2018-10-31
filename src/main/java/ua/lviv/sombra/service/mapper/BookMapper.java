@@ -16,10 +16,14 @@ public interface BookMapper {
 
     BookMapper instance = Mappers.getMapper(BookMapper.class);
 
-    @Mappings({@Mapping(target = "authors",ignore = true)})
+    @Mappings({@Mapping(target = "authors", ignore = true)})
     BookDto bookToBookDto(Book book);
 
     Book bookDtoToBook(BookDto bookDto);
 
-    Set<AuthorDto> map(Set<Author> authors);
+    default Set<AuthorDto> map(Set<Author> authors) {
+        return AuthorMapper.instance.listAuthorToListAuthorDto(authors);
+    }
+
+    Set<BookDto> listBookToListBookDto(Set<Book> books);
 }
